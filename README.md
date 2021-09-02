@@ -18,3 +18,6 @@ Anime.js a été utilisé afin d'animer le masque lors du changement d'image, le
     -   [Lion](https://unsplash.com/photos/d8N0we_W-AQ) par Alexas Fotos
     -   [Loup](https://unsplash.com/photos/WFPWB7Vum1E) par M. Zonderling
     -   [Tigre](https://unsplash.com/photos/wgCr3eIfmaQ) par Juan Camilo Guarin P
+
+# Améliorations futures
+- [ ] fonctionnalité swipe pour mobile
