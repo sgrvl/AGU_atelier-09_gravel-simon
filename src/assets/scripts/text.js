@@ -22,7 +22,6 @@ export const textAnim = (direction) => {
         translateX: 0,
         opacity: 1,
         duration: DURATION * 2,
-        delay: DELAY,
         easing: EASING,
     });
 
@@ -31,7 +30,6 @@ export const textAnim = (direction) => {
         translateX: 0,
         opacity: 1,
         duration: DURATION * 2 + DELAY,
-        delay: DELAY,
         easing: EASING,
     });
 };

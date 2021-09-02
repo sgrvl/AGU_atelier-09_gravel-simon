@@ -29,6 +29,12 @@ header path {
 }
 header a {
   color: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+header a span {
+  padding-right: 0.5em;
+  font-weight: 500;
 }
 header a:hover {
   color: white;
@@ -140,6 +146,9 @@ header a:hover path {
   font-family: inherit;
   font-size: 1em;
   cursor: pointer;
+}
+.carousel nav button:hover {
+  color: white;
 }
 .carousel nav button:disabled {
   color: inherit;

@@ -25,6 +25,13 @@ header {
 
     a {
         color: inherit;
+        display: inline-flex;
+        align-items: center;
+
+        span {
+            padding-right: 0.5em;
+            font-weight: 500;
+        }
 
         &:hover {
             color: white;
@@ -124,6 +131,10 @@ header {
             font-family: inherit;
             font-size: 1em;
             cursor: pointer;
+
+            &:hover {
+                color: white;
+            }
 
             &:disabled {
                 color: inherit;

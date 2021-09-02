@@ -1914,7 +1914,6 @@ const textAnim = (direction)=>{
         translateX: 0,
         opacity: 1,
         duration: _constants.DURATION * 2,
-        delay: _constants.DELAY,
         easing: _constants.EASING
     });
     _animeEsDefault.default({
@@ -1922,7 +1921,6 @@ const textAnim = (direction)=>{
         translateX: 0,
         opacity: 1,
         duration: _constants.DURATION * 2 + _constants.DELAY,
-        delay: _constants.DELAY,
         easing: _constants.EASING
     });
 };
