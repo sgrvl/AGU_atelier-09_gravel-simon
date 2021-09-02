@@ -1,0 +1,140 @@
+@use 'mixins';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+.carousel {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    .slide {
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+
+        &_text_wrap {
+            position: absolute;
+            z-index: 6;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            padding: 1em;
+            // 100% - 15% - 15% (largeur du cover)
+            width: 70%;
+            height: 70%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: black;
+
+            h2 {
+                font-size: clamp(3em, 10vw, 7.5em);
+            }
+
+            p {
+                font-style: italic;
+                font-size: clamp(1em, 3vw, 2.25em);
+            }
+        }
+
+        // color overlay
+        .slide_img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #aaa;
+            opacity: 0.25;
+        }
+
+        &:nth-child(1) .slide_img {
+            height: 100%;
+            transform: translateX(0);
+            background: center / cover no-repeat url(../img/aigle.jpg);
+        }
+
+        &:nth-child(2) {
+            @include mixins.slide_img-hidden(url(../img/ours.jpg));
+        }
+        &:nth-child(3) {
+            @include mixins.slide_img-hidden(url(../img/lion.jpg));
+        }
+
+        &:nth-child(4) {
+            @include mixins.slide_img-hidden(url(../img/loup.jpg));
+        }
+
+        &:nth-child(5) {
+            @include mixins.slide_img-hidden(url(../img/tigre.jpg));
+        }
+    }
+
+    nav {
+        position: absolute;
+        z-index: 10;
+        bottom: 2em;
+        left: 50%;
+        transform: translateX(-50%);
+
+        button {
+            background-color: transparent;
+            border: none;
+            font-weight: bold;
+            font-family: inherit;
+            font-size: 1em;
+            cursor: pointer;
+
+            &:disabled {
+                color: inherit;
+            }
+        }
+    }
+
+    &_cover {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 8;
+
+        * {
+            background-color: white;
+            position: absolute;
+        }
+
+        &-left {
+            height: 100%;
+            width: 15%;
+            transform-origin: 0 50%;
+            transform: scaleX(0);
+        }
+
+        &-right {
+            height: 100%;
+            width: 15%;
+            right: 0;
+            transform-origin: 100% 50%;
+            transform: scaleX(0);
+        }
+
+        &-top {
+            height: 15%;
+            width: 100%;
+            transform-origin: 50% 0;
+            transform: scaleY(0);
+        }
+
+        &-bottom {
+            height: 15%;
+            width: 100%;
+            bottom: 0;
+            transform-origin: 50% 100%;
+            transform: scaleY(0);
+        }
+    }
+}

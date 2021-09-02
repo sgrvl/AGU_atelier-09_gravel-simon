@@ -1,0 +1,12 @@
+@mixin slide_img-hidden($img) {
+    transform: translateX(100vw);
+    .slide_img {
+        height: 100%;
+        background: {
+            image: $img;
+            repeat: no-repeat;
+            position: center;
+            size: cover;
+        }
+    }
+}
