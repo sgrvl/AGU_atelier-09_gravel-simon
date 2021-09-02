@@ -2,10 +2,10 @@ import { DURATION, DELAY, EASING, NEXT, PREV } from './constants';
 import anime from 'animejs/lib/anime.es';
 
 const coverAnim = () => {
-    const coverLeft = document.querySelector('.carousel_cover-left');
-    const coverRight = document.querySelector('.carousel_cover-right');
-    const coverTop = document.querySelector('.carousel_cover-top');
-    const coverBottom = document.querySelector('.carousel_cover-bottom');
+    const coverLeft = document.querySelector('.carrousel_cover-left');
+    const coverRight = document.querySelector('.carrousel_cover-right');
+    const coverTop = document.querySelector('.carrousel_cover-top');
+    const coverBottom = document.querySelector('.carrousel_cover-bottom');
 
     const targetsX = [coverLeft, coverRight];
     const targetsY = [coverTop, coverBottom];

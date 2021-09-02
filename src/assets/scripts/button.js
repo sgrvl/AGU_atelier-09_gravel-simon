@@ -1,6 +1,6 @@
 import { DURATION, DELAY, EASING, NEXT, PREV } from './constants';
 
-// disable les boutons du carousel le temps que l'animation termine
+// disable les boutons du carrousel le temps que l'animation termine
 const disableButton = (e) => {
     NEXT.disabled = true;
     PREV.disabled = true;

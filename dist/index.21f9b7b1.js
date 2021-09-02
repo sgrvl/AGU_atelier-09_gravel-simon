@@ -462,23 +462,90 @@ var _text = require("./text");
 // pour parcel
 if (module.hot) module.hot.accept();
 
-},{"./button":"9Vecu","./cover":"jweTq","./text":"ftT7v","./carrousel":"gybVb"}],"9Vecu":[function(require,module,exports) {
+},{"./carrousel":"gybVb","./button":"9Vecu","./cover":"jweTq","./text":"ftT7v"}],"gybVb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _constants = require("./constants");
-// disable les boutons du carousel le temps que l'animation termine
-const disableButton = (e)=>{
-    _constants.NEXT.disabled = true;
-    _constants.PREV.disabled = true;
-    setTimeout(()=>{
-        _constants.NEXT.disabled = false;
-        _constants.PREV.disabled = false;
-    }, _constants.DURATION + _constants.DELAY * 2);
+var _animeEs = require("animejs/lib/anime.es");
+var _animeEsDefault = parcelHelpers.interopDefault(_animeEs);
+var _text = require("./text");
+const slideControl = ()=>{
+    const slides = document.querySelectorAll('.slide');
+    let activeSlide = 0;
+    const nextSlide = ()=>{
+        let nextSlide1 = activeSlide + 1;
+        if (activeSlide === slides.length - 1) nextSlide1 = 0;
+        slides[nextSlide1].setAttribute('id', 'active');
+        slides[activeSlide].removeAttribute('id');
+        _text.textAnim('next');
+        // place la prochaine image du bon côté (droite)
+        _animeEsDefault.default.set(slides[nextSlide1], {
+            translateX: '100vw'
+        });
+        // place l'image de droite dans le viewport
+        _animeEsDefault.default({
+            targets: slides[nextSlide1],
+            translateX: 0,
+            duration: _constants.DURATION,
+            delay: _constants.DELAY,
+            easing: _constants.EASING
+        });
+        // envoi l'image à gauche
+        _animeEsDefault.default({
+            targets: slides[activeSlide],
+            translateX: '-100vw',
+            duration: _constants.DURATION,
+            delay: _constants.DELAY,
+            easing: _constants.EASING
+        });
+        activeSlide = nextSlide1;
+    };
+    const prevSlide = ()=>{
+        let prevSlide1 = activeSlide - 1;
+        if (activeSlide === 0) prevSlide1 = slides.length - 1;
+        slides[prevSlide1].setAttribute('id', 'active');
+        slides[activeSlide].removeAttribute('id');
+        _text.textAnim();
+        // place la prochaine image du bon côté (gauche)
+        _animeEsDefault.default.set(slides[prevSlide1], {
+            translateX: '-100vw'
+        });
+        // place l'image de gauche dans le viewport
+        _animeEsDefault.default({
+            targets: slides[prevSlide1],
+            translateX: 0,
+            duration: _constants.DURATION,
+            delay: _constants.DELAY,
+            easing: _constants.EASING
+        });
+        // envoi l'image à droite
+        _animeEsDefault.default({
+            targets: slides[activeSlide],
+            translateX: '100vw',
+            duration: _constants.DURATION,
+            delay: _constants.DELAY,
+            easing: _constants.EASING
+        });
+        activeSlide = prevSlide1;
+    };
+    _constants.NEXT.addEventListener('click', ()=>nextSlide()
+    );
+    _constants.PREV.addEventListener('click', ()=>prevSlide()
+    );
+    // détecte si les flèches sont utilisées, simule un click sur le bouton approprié.
+    window.addEventListener('keydown', (e)=>{
+        if (e.key === 'ArrowRight') _constants.NEXT.click();
+        if (e.key === 'ArrowLeft') _constants.PREV.click();
+    });
 };
-_constants.NEXT.addEventListener('click', (e)=>disableButton(e)
-);
-_constants.PREV.addEventListener('click', (e)=>disableButton(e)
-);
+slideControl(); /*
+TODO : 
+    Animation du texte []
+    Button styling [x]
+    favicon [x]
+    header [x]
+*/ 
 
-},{"./constants":"jsbKw"}],"jsbKw":[function(require,module,exports) {
+},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","./text":"ftT7v","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jsbKw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "DURATION", ()=>DURATION
@@ -529,68 +596,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"jweTq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _constants = require("./constants");
-var _animeEs = require("animejs/lib/anime.es");
-var _animeEsDefault = parcelHelpers.interopDefault(_animeEs);
-const coverAnim = ()=>{
-    const coverLeft = document.querySelector('.carousel_cover-left');
-    const coverRight = document.querySelector('.carousel_cover-right');
-    const coverTop = document.querySelector('.carousel_cover-top');
-    const coverBottom = document.querySelector('.carousel_cover-bottom');
-    const targetsX = [
-        coverLeft,
-        coverRight
-    ];
-    const targetsY = [
-        coverTop,
-        coverBottom
-    ];
-    // change le scaleX/Y des différents côtés du cover
-    const anim = (target)=>{
-        _animeEsDefault.default({
-            targets: target,
-            duration: _constants.DURATION,
-            scaleX: target === targetsX ? [
-                0,
-                1
-            ] : 1,
-            scaleY: target === targetsY ? [
-                0,
-                1
-            ] : 1,
-            easing: _constants.EASING,
-            complete: ()=>{
-                _animeEsDefault.default({
-                    targets: target,
-                    duration: _constants.DELAY,
-                    delay: _constants.DELAY,
-                    scaleX: target === targetsX ? [
-                        1,
-                        0
-                    ] : 1,
-                    scaleY: target === targetsY ? [
-                        1,
-                        0
-                    ] : 1,
-                    easing: 'easeOutQuad'
-                });
-            }
-        });
-    };
-    _constants.NEXT.addEventListener('click', ()=>{
-        anim(targetsX);
-        anim(targetsY);
-    });
-    _constants.PREV.addEventListener('click', ()=>{
-        anim(targetsX);
-        anim(targetsY);
-    });
-};
-coverAnim();
-
-},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"o7RAv":[function(require,module,exports) {
+},{}],"o7RAv":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -1919,89 +1925,83 @@ const textAnim = (direction)=>{
     });
 };
 
-},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"gybVb":[function(require,module,exports) {
+},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9Vecu":[function(require,module,exports) {
+var _constants = require("./constants");
+// disable les boutons du carrousel le temps que l'animation termine
+const disableButton = (e)=>{
+    _constants.NEXT.disabled = true;
+    _constants.PREV.disabled = true;
+    setTimeout(()=>{
+        _constants.NEXT.disabled = false;
+        _constants.PREV.disabled = false;
+    }, _constants.DURATION + _constants.DELAY * 2);
+};
+_constants.NEXT.addEventListener('click', (e)=>disableButton(e)
+);
+_constants.PREV.addEventListener('click', (e)=>disableButton(e)
+);
+
+},{"./constants":"jsbKw"}],"jweTq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _constants = require("./constants");
 var _animeEs = require("animejs/lib/anime.es");
 var _animeEsDefault = parcelHelpers.interopDefault(_animeEs);
-var _text = require("./text");
-const slideControl = ()=>{
-    const slides = document.querySelectorAll('.slide');
-    let activeSlide = 0;
-    const nextSlide = ()=>{
-        let nextSlide1 = activeSlide + 1;
-        if (activeSlide === slides.length - 1) nextSlide1 = 0;
-        slides[nextSlide1].setAttribute('id', 'active');
-        slides[activeSlide].removeAttribute('id');
-        _text.textAnim('next');
-        // place la prochaine image du bon côté (droite)
-        _animeEsDefault.default.set(slides[nextSlide1], {
-            translateX: '100vw'
-        });
-        // place l'image de droite dans le viewport
+const coverAnim = ()=>{
+    const coverLeft = document.querySelector('.carrousel_cover-left');
+    const coverRight = document.querySelector('.carrousel_cover-right');
+    const coverTop = document.querySelector('.carrousel_cover-top');
+    const coverBottom = document.querySelector('.carrousel_cover-bottom');
+    const targetsX = [
+        coverLeft,
+        coverRight
+    ];
+    const targetsY = [
+        coverTop,
+        coverBottom
+    ];
+    // change le scaleX/Y des différents côtés du cover
+    const anim = (target)=>{
         _animeEsDefault.default({
-            targets: slides[nextSlide1],
-            translateX: 0,
+            targets: target,
             duration: _constants.DURATION,
-            delay: _constants.DELAY,
-            easing: _constants.EASING
+            scaleX: target === targetsX ? [
+                0,
+                1
+            ] : 1,
+            scaleY: target === targetsY ? [
+                0,
+                1
+            ] : 1,
+            easing: _constants.EASING,
+            complete: ()=>{
+                _animeEsDefault.default({
+                    targets: target,
+                    duration: _constants.DELAY,
+                    delay: _constants.DELAY,
+                    scaleX: target === targetsX ? [
+                        1,
+                        0
+                    ] : 1,
+                    scaleY: target === targetsY ? [
+                        1,
+                        0
+                    ] : 1,
+                    easing: 'easeOutQuad'
+                });
+            }
         });
-        // envoi l'image à gauche
-        _animeEsDefault.default({
-            targets: slides[activeSlide],
-            translateX: '-100vw',
-            duration: _constants.DURATION,
-            delay: _constants.DELAY,
-            easing: _constants.EASING
-        });
-        activeSlide = nextSlide1;
     };
-    const prevSlide = ()=>{
-        let prevSlide1 = activeSlide - 1;
-        if (activeSlide === 0) prevSlide1 = slides.length - 1;
-        slides[prevSlide1].setAttribute('id', 'active');
-        slides[activeSlide].removeAttribute('id');
-        _text.textAnim();
-        // place la prochaine image du bon côté (gauche)
-        _animeEsDefault.default.set(slides[prevSlide1], {
-            translateX: '-100vw'
-        });
-        // place l'image de gauche dans le viewport
-        _animeEsDefault.default({
-            targets: slides[prevSlide1],
-            translateX: 0,
-            duration: _constants.DURATION,
-            delay: _constants.DELAY,
-            easing: _constants.EASING
-        });
-        // envoi l'image à droite
-        _animeEsDefault.default({
-            targets: slides[activeSlide],
-            translateX: '100vw',
-            duration: _constants.DURATION,
-            delay: _constants.DELAY,
-            easing: _constants.EASING
-        });
-        activeSlide = prevSlide1;
-    };
-    _constants.NEXT.addEventListener('click', ()=>nextSlide()
-    );
-    _constants.PREV.addEventListener('click', ()=>prevSlide()
-    );
-    // détecte si les flèches sont utilisées, simule un click sur le bouton approprié.
-    window.addEventListener('keydown', (e)=>{
-        if (e.key === 'ArrowRight') _constants.NEXT.click();
-        if (e.key === 'ArrowLeft') _constants.PREV.click();
+    _constants.NEXT.addEventListener('click', ()=>{
+        anim(targetsX);
+        anim(targetsY);
+    });
+    _constants.PREV.addEventListener('click', ()=>{
+        anim(targetsX);
+        anim(targetsY);
     });
 };
-slideControl(); /*
-TODO : 
-    Animation du texte []
-    Button styling [x]
-    favicon [x]
-    header [x]
-*/ 
+coverAnim();
 
-},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","./text":"ftT7v","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["1YvjO","hkt7F"], "hkt7F", "parcelRequire01a3")
+},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["1YvjO","hkt7F"], "hkt7F", "parcelRequire01a3")
 
 //# sourceMappingURL=index.21f9b7b1.js.map
