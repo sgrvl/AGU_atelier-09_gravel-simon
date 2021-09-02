@@ -1,6 +1,7 @@
 import './carousel';
 import './button';
 import './cover';
+import './text';
 
 // pour parcel
 if (module.hot) {

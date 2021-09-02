@@ -1,5 +1,6 @@
 import { DURATION, DELAY, EASING, NEXT, PREV } from './constants';
 import anime from 'animejs/lib/anime.es';
+import { textAnim } from './text';
 
 const slideControl = () => {
     const slides = document.querySelectorAll('.slide');
@@ -11,6 +12,11 @@ const slideControl = () => {
         if (activeSlide === slides.length - 1) {
             nextSlide = 0;
         }
+
+        slides[nextSlide].setAttribute('id', 'active');
+        slides[activeSlide].removeAttribute('id');
+
+        textAnim('next');
 
         // place la prochaine image du bon côté (droite)
         anime.set(slides[nextSlide], {
@@ -44,6 +50,11 @@ const slideControl = () => {
         if (activeSlide === 0) {
             prevSlide = slides.length - 1;
         }
+
+        slides[prevSlide].setAttribute('id', 'active');
+        slides[activeSlide].removeAttribute('id');
+
+        textAnim();
 
         // place la prochaine image du bon côté (gauche)
         anime.set(slides[prevSlide], {
@@ -86,6 +97,6 @@ slideControl();
 TODO : 
     Animation du texte []
     Button styling [x]
-    favicon []
-    header
+    favicon [x]
+    header [x]
 */

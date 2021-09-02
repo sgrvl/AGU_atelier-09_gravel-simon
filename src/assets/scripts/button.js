@@ -7,7 +7,7 @@ const disableButton = (e) => {
     setTimeout(() => {
         NEXT.disabled = false;
         PREV.disabled = false;
-    }, DURATION + DELAY);
+    }, DURATION + DELAY * 2);
 };
 
 NEXT.addEventListener('click', (e) => disableButton(e));

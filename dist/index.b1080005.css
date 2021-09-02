@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,6 +7,34 @@
 }
 body {
   font-family: "Inter", sans-serif;
+}
+header {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 1.5em;
+}
+header h1 {
+  font-size: 1em;
+  font-weight: 500;
+}
+header svg {
+  height: 1.5em;
+  width: auto;
+}
+header path {
+  fill: black;
+}
+header a {
+  color: inherit;
+}
+header a:hover {
+  color: white;
+}
+header a:hover path {
+  fill: white;
 }
 .carousel {
   height: 100vh;

@@ -458,20 +458,25 @@ function hmrAcceptRun(bundle, id) {
 var _carousel = require("./carousel");
 var _button = require("./button");
 var _cover = require("./cover");
+var _text = require("./text");
 // pour parcel
 if (module.hot) module.hot.accept();
 
-},{"./carousel":"1I8cK","./button":"9Vecu","./cover":"jweTq"}],"1I8cK":[function(require,module,exports) {
+},{"./carousel":"1I8cK","./button":"9Vecu","./cover":"jweTq","./text":"ftT7v"}],"1I8cK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _constants = require("./constants");
 var _animeEs = require("animejs/lib/anime.es");
 var _animeEsDefault = parcelHelpers.interopDefault(_animeEs);
+var _text = require("./text");
 const slideControl = ()=>{
     const slides = document.querySelectorAll('.slide');
     let activeSlide = 0;
     const nextSlide = ()=>{
         let nextSlide1 = activeSlide + 1;
         if (activeSlide === slides.length - 1) nextSlide1 = 0;
+        slides[nextSlide1].setAttribute('id', 'active');
+        slides[activeSlide].removeAttribute('id');
+        _text.textAnim('next');
         // place la prochaine image du bon côté (droite)
         _animeEsDefault.default.set(slides[nextSlide1], {
             translateX: '100vw'
@@ -497,6 +502,9 @@ const slideControl = ()=>{
     const prevSlide = ()=>{
         let prevSlide1 = activeSlide - 1;
         if (activeSlide === 0) prevSlide1 = slides.length - 1;
+        slides[prevSlide1].setAttribute('id', 'active');
+        slides[activeSlide].removeAttribute('id');
+        _text.textAnim();
         // place la prochaine image du bon côté (gauche)
         _animeEsDefault.default.set(slides[prevSlide1], {
             translateX: '-100vw'
@@ -533,11 +541,11 @@ slideControl(); /*
 TODO : 
     Animation du texte []
     Button styling [x]
-    favicon []
-    header
+    favicon [x]
+    header [x]
 */ 
 
-},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jsbKw":[function(require,module,exports) {
+},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./text":"ftT7v"}],"jsbKw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "DURATION", ()=>DURATION
@@ -1876,7 +1884,50 @@ anime.random = function(min, max) {
 };
 exports.default = anime;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9Vecu":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"ftT7v":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "textAnim", ()=>textAnim
+);
+var _constants = require("./constants");
+var _animeEs = require("animejs/lib/anime.es");
+var _animeEsDefault = parcelHelpers.interopDefault(_animeEs);
+const textAnim = (direction)=>{
+    const title = document.querySelector('#active h2');
+    const desc = document.querySelector('#active p');
+    if (direction === 'next') _animeEsDefault.default.set([
+        title,
+        desc
+    ], {
+        translateX: '100vw',
+        opacity: 0
+    });
+    else _animeEsDefault.default.set([
+        title,
+        desc
+    ], {
+        translateX: '-100vw',
+        opacity: 0
+    });
+    _animeEsDefault.default({
+        targets: title,
+        translateX: 0,
+        opacity: 1,
+        duration: _constants.DURATION * 2,
+        delay: _constants.DELAY,
+        easing: _constants.EASING
+    });
+    _animeEsDefault.default({
+        targets: desc,
+        translateX: 0,
+        opacity: 1,
+        duration: _constants.DURATION * 2 + _constants.DELAY,
+        delay: _constants.DELAY,
+        easing: _constants.EASING
+    });
+};
+
+},{"./constants":"jsbKw","animejs/lib/anime.es":"o7RAv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9Vecu":[function(require,module,exports) {
 var _constants = require("./constants");
 // disable les boutons du carousel le temps que l'animation termine
 const disableButton = (e)=>{
@@ -1885,7 +1936,7 @@ const disableButton = (e)=>{
     setTimeout(()=>{
         _constants.NEXT.disabled = false;
         _constants.PREV.disabled = false;
-    }, _constants.DURATION + _constants.DELAY);
+    }, _constants.DURATION + _constants.DELAY * 2);
 };
 _constants.NEXT.addEventListener('click', (e)=>disableButton(e)
 );
