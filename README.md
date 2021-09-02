@@ -1,5 +1,7 @@
 # Carousel animé avec anime.js
 
+[Demo](https://sgrvl-carousel.netlify.app/)
+
 Ce projet a été effectué dans le cadre du cours de production d'interfaces interactives animées du Cégep de Limoilou.
 
 Le défi était d'explorer la documentation d'une librairie Javascript inconnue (anime.js dans mon cas) et de réaliser une page web contenant des animations créées à partir de cette dite librairie.
