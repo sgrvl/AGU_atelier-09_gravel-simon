@@ -1,6 +1,6 @@
-# Carousel animé avec anime.js
+# Carrousel animé avec anime.js
 
-[Demo](https://sgrvl-carousel.netlify.app/)
+[Demo](https://sgrvl-carrousel.netlify.app/)
 
 Ce projet a été effectué dans le cadre du cours de production d'interfaces interactives animées du Cégep de Limoilou.
 
@@ -10,7 +10,7 @@ Anime.js a été utilisé afin d'animer le masque lors du changement d'image, le
 
 # Crédits
 
--   [Inspiration pour le carousel](https://github.com/codrops/AnimatedFrameSlideshow/) par Codrops
+-   [Inspiration pour le carrousel](https://github.com/codrops/AnimatedFrameSlideshow/) par Codrops
 -   [anime.js](https://animejs.com/) par Julian Garnier
 -   Images prises sur [Unsplash](https://unsplash.com/)
     -   [Aigle Royal](https://unsplash.com/photos/UsgLeLorRuM) par Alfred Kenneally

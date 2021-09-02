@@ -42,17 +42,17 @@ header a:hover {
 header a:hover path {
   fill: white;
 }
-.carousel {
+.carrousel {
   height: 100vh;
   position: relative;
   overflow: hidden;
 }
-.carousel .slide {
+.carrousel .slide {
   height: 100vh;
   width: 100%;
   position: absolute;
 }
-.carousel .slide_text_wrap {
+.carrousel .slide_text_wrap {
   position: absolute;
   z-index: 6;
   top: 0;
@@ -70,14 +70,14 @@ header a:hover path {
   text-align: center;
   color: black;
 }
-.carousel .slide_text_wrap h2 {
+.carrousel .slide_text_wrap h2 {
   font-size: clamp(3em, 10vw, 7.5em);
 }
-.carousel .slide_text_wrap p {
+.carrousel .slide_text_wrap p {
   font-style: italic;
   font-size: clamp(1em, 3vw, 2.25em);
 }
-.carousel .slide .slide_img::after {
+.carrousel .slide .slide_img::after {
   content: "";
   position: absolute;
   top: 0;
@@ -87,59 +87,59 @@ header a:hover path {
   background-color: #aaa;
   opacity: 0.25;
 }
-.carousel .slide:nth-child(1) .slide_img {
+.carrousel .slide:nth-child(1) .slide_img {
   height: 100%;
   transform: translateX(0);
   background: center/cover no-repeat url(aigle.1d3d7aa6.jpg);
 }
-.carousel .slide:nth-child(2) {
+.carrousel .slide:nth-child(2) {
   transform: translateX(100vw);
 }
-.carousel .slide:nth-child(2) .slide_img {
+.carrousel .slide:nth-child(2) .slide_img {
   height: 100%;
   background-image: url(ours.d960b6be.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
-.carousel .slide:nth-child(3) {
+.carrousel .slide:nth-child(3) {
   transform: translateX(100vw);
 }
-.carousel .slide:nth-child(3) .slide_img {
+.carrousel .slide:nth-child(3) .slide_img {
   height: 100%;
   background-image: url(lion.04b5d482.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
-.carousel .slide:nth-child(4) {
+.carrousel .slide:nth-child(4) {
   transform: translateX(100vw);
 }
-.carousel .slide:nth-child(4) .slide_img {
+.carrousel .slide:nth-child(4) .slide_img {
   height: 100%;
   background-image: url(loup.e9f9fa31.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
-.carousel .slide:nth-child(5) {
+.carrousel .slide:nth-child(5) {
   transform: translateX(100vw);
 }
-.carousel .slide:nth-child(5) .slide_img {
+.carrousel .slide:nth-child(5) .slide_img {
   height: 100%;
   background-image: url(tigre.9367d8e5.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
-.carousel nav {
+.carrousel nav {
   position: absolute;
   z-index: 10;
   bottom: 2em;
   left: 50%;
   transform: translateX(-50%);
 }
-.carousel nav button {
+.carrousel nav button {
   background-color: transparent;
   border: none;
   font-weight: bold;
@@ -147,42 +147,42 @@ header a:hover path {
   font-size: 1em;
   cursor: pointer;
 }
-.carousel nav button:hover {
+.carrousel nav button:hover {
   color: white;
 }
-.carousel nav button:disabled {
+.carrousel nav button:disabled {
   color: inherit;
 }
-.carousel_cover {
+.carrousel_cover {
   position: absolute;
   height: 100%;
   width: 100%;
   z-index: 8;
 }
-.carousel_cover * {
+.carrousel_cover * {
   background-color: white;
   position: absolute;
 }
-.carousel_cover-left {
+.carrousel_cover-left {
   height: 100%;
   width: 15%;
   transform-origin: 0 50%;
   transform: scaleX(0);
 }
-.carousel_cover-right {
+.carrousel_cover-right {
   height: 100%;
   width: 15%;
   right: 0;
   transform-origin: 100% 50%;
   transform: scaleX(0);
 }
-.carousel_cover-top {
+.carrousel_cover-top {
   height: 15%;
   width: 100%;
   transform-origin: 50% 0;
   transform: scaleY(0);
 }
-.carousel_cover-bottom {
+.carrousel_cover-bottom {
   height: 15%;
   width: 100%;
   bottom: 0;
