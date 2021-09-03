@@ -459,8 +459,6 @@ var _carrousel = require("./carrousel");
 var _button = require("./button");
 var _cover = require("./cover");
 var _text = require("./text");
-// pour parcel
-if (module.hot) module.hot.accept();
 
 },{"./carrousel":"gybVb","./button":"9Vecu","./cover":"jweTq","./text":"ftT7v"}],"gybVb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
